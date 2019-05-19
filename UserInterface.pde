@@ -54,6 +54,7 @@ void saveImg() {
   saveFrame("mapa-######.png");
   toSave = 0;
   cp5.show();
+  map.serialize();
 }
 
 void volta() {
@@ -61,5 +62,8 @@ void volta() {
 }
 
 void Limpa() {
-  limparCanvas();
+  map.clear();
+  map.randomMap();
+  map.draw();
+  //limparCanvas();
 }

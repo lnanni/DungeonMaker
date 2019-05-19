@@ -25,7 +25,7 @@ void setup() {
 void draw() {
   print();
   toGrid();
-  //println(mouseX + " : " +  mouseY);
+
 }
 
  
@@ -150,7 +150,9 @@ PVector mouseVector(){
 }
 
 PVector toGrid() {
-
+  return toGrid(mouseX,mouseY);
+}
+PVector toGrid(int x, int y) {
   strokeWeight(1);
   stroke(51, 64);
   for (int i = 0; i < width; i+=50) {
@@ -158,9 +160,8 @@ PVector toGrid() {
     line(0, i, width, i);
   }
   stroke(0); 
-  return new PVector(ceil(mouseX/50) * 50 + 25, ceil(mouseY/50) * 50 + 25);
+  return new PVector(ceil(x/50) * 50 + 25, ceil(y/50) * 50 + 25);
 }
-
 
 void limparCanvas() {
   map.clear();

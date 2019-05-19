@@ -100,6 +100,12 @@ public class Action {
             case Arc:
                 arc(pos.x-25, pos.y+25,150,150, 0, PI);
             break;
+
+            case Triangulo:
+                int[] a = {-22, 22, 0, -20, 22, 22};
+                triangle(pos.x+a[0], pos.y+a[1], pos.x+a[2], pos.y+a[3], pos.x+a[4], pos.y+a[5]);
+                //TODO: add text (N, S, L, O)
+            break;
         }
 
     }
@@ -108,7 +114,7 @@ public class Action {
     }
 
     public boolean isSafe (){
-        return(this.action == ActionType.Circulo||this.action == ActionType.Cubo);
+        return(this.action == ActionType.Circulo||this.action == ActionType.Cubo||this.action == ActionType.Triangulo);
 
     } 
     
@@ -127,6 +133,6 @@ public class Action {
 }
 
 public enum ActionType{
-    Circulo, Linha, Traco, Ponto, Bezier, Cubo, Arc;
+    Circulo, Linha, Traco, Ponto, Bezier, Cubo, Arc, Triangulo;
 
 }
