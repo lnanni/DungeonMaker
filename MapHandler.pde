@@ -5,7 +5,7 @@ class MapHandler{
 
     MapHandler(){        
         actions = new ArrayList<Action>();  
-        //randomMap();
+        randomMap();
     }
 
     void draw(){
@@ -72,7 +72,7 @@ class MapHandler{
         for(int i = 100; i < width -50; i+=50){
             for (int j = 100; j < height-150; j+=50) {
                 float n = noise(i,j);
-                if(n >= 0.75)
+                if(n >= 0.74)
                     add( new Action(ActionType.Circulo, toGrid(i,j), nextNumber()+1));
             }
         }
@@ -81,23 +81,41 @@ class MapHandler{
         //link circles with lines
         for (int i = 0; i < actions.size(); i++) {
             for (int j = 0; j < actions.size(); j++) {
-                if(i == j) break ;
-                if(actions.get(i).action == ActionType.Circulo 
-                && actions.get(j).isSafe() ){
-                    if( actions.get(i).pos.dist(actions.get(j).pos) <200 && random(1) > 0.5){
-                            add( new Action(ActionType.Linha, actions.get(i).pos, actions.get(j).pos ));
-                            
+                if(i == j)  break;
+                if(actions.get(i).action == ActionType.Circulo && actions.get(j).action == ActionType.Circulo ){
+                    if( actions.get(i).pos.dist(actions.get(j).pos) <200){
+                        //add( new Action(ActionType.Linha, actions.get(i).pos, actions.get(j).pos ));
+                        add( new Action(ActionType.Linha, actions.get(i).pos, near(actions.get(j).pos)));
+                        
                     }   
                 }
             }
         } 
-                                         
+        // Link each triangle to ONE cricle
+        for (int i = 0; i < actions.size(); i++) {
+            Action o = actions.get(i);
+            if(o.action == ActionType.Triangulo){
+                add(new Action(ActionType.Linha, o.pos, near(o.pos)));
 
-            
-        
-
+            }
+        } 
         //Done? 
 
     }
 
+
+    private PVector near(PVector v){
+        PVector near =v;
+        float d = 1000;
+
+        for (int i = 0; i < actions.size(); ++i) {
+            if((actions.get(i).pos.dist(v)) < d && actions.get(i).pos != v)
+            {
+                d = actions.get(i).pos.dist(v);
+                near = actions.get(i).pos;
+            }
+        }
+        return near;
+
+    }
 }
