@@ -5,3 +5,4 @@ applet
 *.autosave
 *.json
 .vscode
+*.tmp 

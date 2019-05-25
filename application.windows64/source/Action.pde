@@ -58,7 +58,7 @@ public class Action {
             break;
 
             case Traco : 
-               dashed.pattern(20, 10); 
+               dashed.pattern(10, 5); 
                dashed.line(pos.x, pos.y, end.x, end.y );
             break;
 
